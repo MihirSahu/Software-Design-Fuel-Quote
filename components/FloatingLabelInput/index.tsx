@@ -15,7 +15,7 @@ export function FloatingLabelInput(props: {
   disabled?: boolean;
   initialValue?: string;
   number?: boolean;
-  setState: (value: string) => void;
+  setState?: (value: string) => void;
 }) {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState(props.initialValue ?? '');
@@ -30,7 +30,9 @@ export function FloatingLabelInput(props: {
       value={value}
       onChange={(event) => {
         const newText = event.currentTarget.value;
-        props.setState(event.currentTarget.value);
+        if (props.setState) {
+          props.setState(event.currentTarget.value);
+        }
 
         if (props.number) {
           const numberText = newText
