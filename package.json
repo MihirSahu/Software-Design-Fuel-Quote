@@ -21,6 +21,7 @@
   "dependencies": {
     "@mantine/core": "7.5.3",
     "@mantine/hooks": "7.5.3",
+    "@mantine/notifications": "^7.6.2",
     "@next/bundle-analyzer": "^14.0.1",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.7",
