@@ -1,7 +1,10 @@
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
+import { Notifications } from '@mantine/notifications';
 
 export const metadata = {
   title: 'Fuelonomy',
@@ -20,7 +23,10 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}>
+          <Notifications />
+          {children}
+        </MantineProvider>
       </body>
     </html>
   );

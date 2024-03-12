@@ -5,10 +5,13 @@ import { useState } from 'react';
 import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
+import { useRouter } from 'next/navigation';
+import { notifications } from '@mantine/notifications';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { push } = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -16,9 +19,6 @@ export default function RegisterPage() {
     const formData = new URLSearchParams();
     formData.append('email', email);
     formData.append('password', password);
-
-    console.log(email);
-    console.log(password);
 
     const response = await fetch('/auth/signup', {
       method: 'POST',
@@ -29,10 +29,20 @@ export default function RegisterPage() {
     })
 
     if (response.status === 200) {
-      console.log('Success')
+      notifications.show({
+        title: 'Success',
+        message: 'You have been logged in!',
+        color: 'teal',
+      });
+      push('/private')
     }
     else {
-      console.log('Error')
+      const error = await response.json();
+      notifications.show({
+        title: 'Error',
+        message: error['error'],
+        color: 'red',
+      });
     }
   };
 

@@ -6,6 +6,7 @@ import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { useRouter } from 'next/navigation';
+import { notifications } from '@mantine/notifications';
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('');
@@ -19,9 +20,6 @@ export default function LoginPage() {
     formData.append('email', email);
     formData.append('password', password);
 
-    console.log(email);
-    console.log(password);
-
     const response = await fetch('/auth/login', {
       method: 'POST',
       headers: {
@@ -31,10 +29,20 @@ export default function LoginPage() {
     })
 
     if (response.status === 200) {
+      notifications.show({
+        title: 'Success',
+        message: 'You have been logged in!',
+        color: 'teal',
+      });
       push('/private')
     }
     else {
-      console.log('Error')
+      const error = await response.json();
+      notifications.show({
+        title: 'Error',
+        message: error['error'],
+        color: 'red',
+      });
     }
   };
 
