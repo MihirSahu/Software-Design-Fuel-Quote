@@ -1,8 +1,17 @@
 import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
+import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
 
-export default function QuotePage() {
+export default async function QuotePage() {
+  const supabase = createClient()
+
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect('/')
+  }
+
   const getCurrentDate = () => {
     const timestamp = new Date().toISOString();
     return timestamp.substring(0, timestamp.lastIndexOf(':'));

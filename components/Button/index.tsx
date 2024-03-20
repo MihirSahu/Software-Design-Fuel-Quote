@@ -1,6 +1,6 @@
 import { Button as MantineButton } from '@mantine/core';
 
-export function Button(props: { children: string }) {
+export function Button(props: { children: string; onClick?: (event: React.FormEvent<HTMLFormElement>) => Promise<void>}) {
   return (
     <>
       <div>
@@ -9,6 +9,7 @@ export function Button(props: { children: string }) {
             width: 120,
           }}
           variant="default"
+          onClick={props.onClick}
         >
           {props.children}
         </MantineButton>

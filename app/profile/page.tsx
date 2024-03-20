@@ -2,8 +2,17 @@ import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { FloatingLabelSelect } from '../../components/FloatingLabelSelect';
+import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const supabase = createClient()
+
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect('/')
+  }
+
   const states = [
     'AL',
     'AK',
