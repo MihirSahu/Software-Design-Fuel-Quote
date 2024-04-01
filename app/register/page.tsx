@@ -34,7 +34,7 @@ export default function RegisterPage() {
         message: 'You have been logged in!',
         color: 'teal',
       });
-      push('/private')
+      push('/quote')
     }
     else {
       const error = await response.json();

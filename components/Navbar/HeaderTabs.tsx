@@ -31,6 +31,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { notifications } from '@mantine/notifications';
 import { usePathname } from 'next/navigation';
+import { createClient } from '@/utils/supabase/client';
 
 const user = {
   name: 'Jane Spoonfighter',
@@ -49,6 +50,7 @@ export function HeaderTabs() {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
   const {push} = useRouter();
   const pathname = usePathname();
+  const client = createClient();
 
   const items = tabs.map((tab) => (
     <Tabs.Tab value={tab} key={tab} onClick={() => push(tab.toLowerCase())}>
@@ -56,7 +58,6 @@ export function HeaderTabs() {
     </Tabs.Tab>
   ));
 
-  if (pathname !== '/login' && pathname !== '/register') {
     return (
       <div className={classes.header}>
         <Container className={classes.mainSection} size="md">
@@ -80,7 +81,7 @@ export function HeaderTabs() {
                   <Group gap={7}>
                     {/*<Avatar src={user.image} alt={user.name} radius="xl" size={20} />*/}
                     <Text fw={500} size="sm" lh={1} mr={3}>
-                      {user.name}
+                      Settings
                     </Text>
                     <IconChevronDown style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
                   </Group>
@@ -149,5 +150,4 @@ export function HeaderTabs() {
         </Container>
       </div>
     );
-  }
 }

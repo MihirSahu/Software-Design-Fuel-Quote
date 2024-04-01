@@ -10,6 +10,7 @@ export function FloatingLabelSelect(props: {
   data: ComboboxData;
   required?: boolean;
   initialValue?: string;
+  setState: (value: string) => void;
 }) {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState(props.initialValue ?? '');
@@ -23,7 +24,7 @@ export function FloatingLabelSelect(props: {
       required={props.required}
       classNames={classes}
       value={value}
-      onChange={(event) => setValue(event.currentTarget.value)}
+      onChange={(event) => props.setState(event.currentTarget.value)}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       mt="md"

@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: { children: any }) {
       </head>
       <body>
         <MantineProvider theme={theme}>
-          <HeaderTabs />
+          {/*<HeaderTabs />*/}
           <Notifications />
           {children}
         </MantineProvider>

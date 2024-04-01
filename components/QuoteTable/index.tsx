@@ -1,7 +1,10 @@
+'use client'
+
 import { QuoteTableCell } from './QuoteTableCell';
 import { QuoteTableRow } from './QuoteTableRow';
 
-export function QuoteTable() {
+export function QuoteTable(props: {history: any}) {
+  // console.log(props.history)
   return (
     <>
       <div
@@ -27,6 +30,17 @@ export function QuoteTable() {
             <QuoteTableCell>Total Amount Due</QuoteTableCell>
             <QuoteTableCell>Request Date</QuoteTableCell>
           </QuoteTableRow>
+          {props.history.map((quote: any, index: any) => (
+                <QuoteTableRow key={index}>
+                  <QuoteTableCell>{quote['gallons_requested']}</QuoteTableCell>
+                  <QuoteTableCell>{quote['delivery_address']}</QuoteTableCell>
+                  <QuoteTableCell>{quote['delivery_date']}</QuoteTableCell>
+                  <QuoteTableCell>{quote['price']}</QuoteTableCell>
+                  <QuoteTableCell>{quote['amount_due']}</QuoteTableCell>
+                  <QuoteTableCell>{quote['request_date']}</QuoteTableCell>
+                </QuoteTableRow>
+          ))}
+          {/*
           <QuoteTableRow>
             <QuoteTableCell>15</QuoteTableCell>
             <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
@@ -91,6 +105,7 @@ export function QuoteTable() {
             <QuoteTableCell>$78.45</QuoteTableCell>
             <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
           </QuoteTableRow>
+        */}
         </div>
       </div>
     </>

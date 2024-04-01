@@ -1,5 +1,5 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
@@ -54,7 +54,15 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  await supabase.auth.getUser()
-
-  return response
+  const { data, error } = await supabase.auth.getUser()
+  const url = request.nextUrl.clone()
+  const authPathRegex = /^\/auth/
+  const actionsPathRegex = /^\/actions/
+  if (url.pathname === '/login' || url.pathname === '/register' || authPathRegex.test(url.pathname) || actionsPathRegex.test(url.pathname)) {
+    return
+  }
+  else if (error || !data?.user) {
+    url.pathname = '/login'
+    return NextResponse.rewrite(url)
+  }
 }

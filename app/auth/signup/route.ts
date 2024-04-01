@@ -13,10 +13,21 @@ export async function POST(request: Request) {
   const email = String(formData.get('email'))
   const password = String(formData.get('password'))
 
-  const { error } = await supabase.auth.signUp({ email, password })
+  const signup = await supabase.auth.signUp({ email, password })
 
-  if (error) {
-    return NextResponse.json( { error: error.message }, { status: 401 })
+  if (signup.error) {
+    return NextResponse.json( { error: signup.error.message }, { status: 401 })
+  }
+
+  const { data: { user } } = await supabase.auth.getUser()
+  const userId = user?.id
+
+  const insertUser = await supabase
+    .from('user')
+    .insert({user_id: user?.id})
+  
+  if (insertUser.error) {
+    return NextResponse.json( { error: insertUser.error.message }, { status: 401 })
   }
 
   revalidatePath('/', 'layout')

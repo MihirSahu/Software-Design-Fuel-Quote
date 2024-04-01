@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { TextInput } from '@mantine/core';
 const classes = require('./FloatingLabelInput.module.css');
+import { useEffect } from 'react';
 
 export function FloatingLabelInput(props: {
   label: string;
@@ -18,9 +19,14 @@ export function FloatingLabelInput(props: {
   setState?: (value: string) => void;
 }) {
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState(props.initialValue ?? '');
+  const [value, setValue] = useState<string>(props.initialValue ?? '');
   const floating = value.trim().length !== 0 || focused || undefined;
 
+  useEffect(() => {
+    // console.log('initialValue:', typeof props.initialValue, props.initialValue)
+    setValue(String(props.initialValue ?? ''));
+  }, [props.initialValue]);
+  
   return (
     <TextInput
       label={props.label}
