@@ -12,6 +12,7 @@
     "lint:stylelint": "stylelint '**/*.css' --cache",
     "jest": "jest",
     "jest:watch": "jest --watch",
+    "jest:coverage": "jest --coverage",
     "prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
     "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
     "test": "npm run prettier:check && npm run lint && npm run typecheck && npm run jest",
@@ -28,7 +29,8 @@
     "@tabler/icons-react": "^2.40.0",
     "next": "14.0.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
