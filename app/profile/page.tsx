@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
 import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { FloatingLabelSelect } from '../../components/FloatingLabelSelect';
-import { createClient } from '@/utils/supabase/client'
-import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/client';
+import { redirect } from 'next/navigation';
 import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 import { notifications } from '@mantine/notifications';
 import { useState, useEffect } from 'react';
@@ -40,26 +40,26 @@ export default function ProfilePage() {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: formData,
-      })
+      });
 
       if (response.status !== 200) {
-        notifications.show({ 
-          title: 'Something went wrong', 
-          message: 'History could not be fetched', 
+        notifications.show({
+          title: 'Something went wrong',
+          message: 'History could not be fetched',
           color: 'red',
           closeButtonProps: { display: 'none' },
-        })
+        });
       }
 
-      const parsedResponse = await response.json()
+      const parsedResponse = await response.json();
       // console.log(parsedResponse['data'][0])
 
-      setFullName(parsedResponse['data'][0]['name'])
-      setAddressLine1(parsedResponse['data'][0]['address_line_1'])
-      setAddressLine2(parsedResponse['data'][0]['address_line_2'])
-      setCity(parsedResponse['data'][0]['city'])
-      setState(parsedResponse['data'][0]['state'])
-      setZipCode(parsedResponse['data'][0]['zip_code'])
+      setFullName(parsedResponse['data'][0]['name']);
+      setAddressLine1(parsedResponse['data'][0]['address_line_1']);
+      setAddressLine2(parsedResponse['data'][0]['address_line_2']);
+      setCity(parsedResponse['data'][0]['city']);
+      setState(parsedResponse['data'][0]['state']);
+      setZipCode(parsedResponse['data'][0]['zip_code']);
 
       //console.log(fullName, addressLine1, addressLine2, city, state, zipCode)
     };
@@ -83,7 +83,7 @@ export default function ProfilePage() {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: formData,
-    })
+    });
 
     if (response.status === 200) {
       notifications.show({
@@ -91,8 +91,7 @@ export default function ProfilePage() {
         message: 'Profile updated!',
         color: 'teal',
       });
-    }
-    else {
+    } else {
       const error = await response.json();
       notifications.show({
         title: 'Error',
@@ -159,7 +158,14 @@ export default function ProfilePage() {
     <>
       <HeaderTabs />
       <Form title="Profile" top="20vh">
-        <FloatingLabelInput label="Full Name" placeholder="John Doe" required maxLength={50} initialValue={fullName} setState={setFullName} />
+        <FloatingLabelInput
+          label="Full Name"
+          placeholder="John Doe"
+          required
+          maxLength={50}
+          initialValue={fullName}
+          setState={setFullName}
+        />
         <FloatingLabelInput
           label="Address Line 1"
           placeholder="1234 Main Street"
@@ -168,8 +174,21 @@ export default function ProfilePage() {
           setState={setAddressLine1}
           initialValue={addressLine1}
         />
-        <FloatingLabelInput label="Address Line 2" placeholder="Apt 5" maxLength={100} setState={setAddressLine2} initialValue={addressLine2} />
-        <FloatingLabelInput label="City" placeholder="New York City" maxLength={100} required setState={setCity} initialValue={city} />
+        <FloatingLabelInput
+          label="Address Line 2"
+          placeholder="Apt 5"
+          maxLength={100}
+          setState={setAddressLine2}
+          initialValue={addressLine2}
+        />
+        <FloatingLabelInput
+          label="City"
+          placeholder="New York City"
+          maxLength={100}
+          required
+          setState={setCity}
+          initialValue={city}
+        />
         <FloatingLabelSelect
           label="State"
           placeholder="NY"

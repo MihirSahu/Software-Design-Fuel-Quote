@@ -1,4 +1,10 @@
-export function Form(props: { title: string; children?: any; top?: string; width?: string, onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void }) {
+export function Form(props: {
+  title: string;
+  children?: any;
+  top?: string;
+  width?: string;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+}) {
   return (
     <>
       <div

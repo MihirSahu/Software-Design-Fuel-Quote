@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["jest"],
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -19,6 +20,6 @@
     },
     "plugins": [{ "name": "next" }]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "jest.config.cjs", "jest.setup.cjs"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "jest.config.cjs", "jest.setup.cjs", "app/__tests__/initial_login.tsx"],
   "exclude": ["node_modules"]
 }
