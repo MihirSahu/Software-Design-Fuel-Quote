@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
 import { QuoteTableCell } from './QuoteTableCell';
 import { QuoteTableRow } from './QuoteTableRow';
 
-export function QuoteTable(props: {history: any}) {
+export function QuoteTable(props: { history: any }) {
   // console.log(props.history)
   return (
     <>
@@ -31,14 +31,14 @@ export function QuoteTable(props: {history: any}) {
             <QuoteTableCell>Request Date</QuoteTableCell>
           </QuoteTableRow>
           {props.history.map((quote: any, index: any) => (
-                <QuoteTableRow key={index}>
-                  <QuoteTableCell>{quote['gallons_requested']}</QuoteTableCell>
-                  <QuoteTableCell>{quote['delivery_address']}</QuoteTableCell>
-                  <QuoteTableCell>{quote['delivery_date']}</QuoteTableCell>
-                  <QuoteTableCell>{quote['price']}</QuoteTableCell>
-                  <QuoteTableCell>{quote['amount_due']}</QuoteTableCell>
-                  <QuoteTableCell>{quote['request_date']}</QuoteTableCell>
-                </QuoteTableRow>
+            <QuoteTableRow key={index}>
+              <QuoteTableCell>{quote['gallons_requested']}</QuoteTableCell>
+              <QuoteTableCell>{quote['delivery_address']}</QuoteTableCell>
+              <QuoteTableCell>{quote['delivery_date']}</QuoteTableCell>
+              <QuoteTableCell>{quote['price']}</QuoteTableCell>
+              <QuoteTableCell>{quote['amount_due']}</QuoteTableCell>
+              <QuoteTableCell>{quote['request_date']}</QuoteTableCell>
+            </QuoteTableRow>
           ))}
           {/*
           <QuoteTableRow>

@@ -1,6 +1,9 @@
 import { Button as MantineButton } from '@mantine/core';
 
-export function Button(props: { children: string; onClick?: (event: React.FormEvent<HTMLFormElement>) => Promise<void>}) {
+export function Button(props: {
+  children: string;
+  onClick?: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+}) {
   return (
     <>
       <div>

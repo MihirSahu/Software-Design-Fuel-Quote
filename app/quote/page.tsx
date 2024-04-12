@@ -3,8 +3,8 @@
 import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
-import { createClient } from '@/utils/supabase/client'
-import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/client';
+import { redirect } from 'next/navigation';
 import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 import { notifications } from '@mantine/notifications';
 import { useState } from 'react';
@@ -42,7 +42,7 @@ export default function QuotePage() {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: formData,
-    })
+    });
 
     if (response.status === 200) {
       notifications.show({
@@ -51,8 +51,7 @@ export default function QuotePage() {
         color: 'teal',
       });
       // push('/quote')
-    }
-    else {
+    } else {
       const error = await response.json();
       notifications.show({
         title: 'Error',
@@ -71,7 +70,13 @@ export default function QuotePage() {
     <>
       <HeaderTabs />
       <Form title="Fuel Quote" top="20vh">
-        <FloatingLabelInput label="Gallons Requested" placeholder="15" type="number" required setState={setGallonsRequested} />
+        <FloatingLabelInput
+          label="Gallons Requested"
+          placeholder="15"
+          type="number"
+          required
+          setState={setGallonsRequested}
+        />
         <FloatingLabelInput
           label="Delivery Address"
           placeholder="1234 Main Street"
@@ -86,8 +91,18 @@ export default function QuotePage() {
           initialValue={getCurrentDate()}
           setState={setDeliveryDate}
         />
-        <FloatingLabelInput label="Price / Gallon" placeholder="" type="number" setState={setPricePerGallon} />
-        <FloatingLabelInput label="Total Amount Due" placeholder="" type="number" setState={setTotalAmountDue} />
+        <FloatingLabelInput
+          label="Price / Gallon"
+          placeholder=""
+          type="number"
+          setState={setPricePerGallon}
+        />
+        <FloatingLabelInput
+          label="Total Amount Due"
+          placeholder=""
+          type="number"
+          setState={setTotalAmountDue}
+        />
         <Button onClick={handleSubmit}>Request</Button>
       </Form>
     </>

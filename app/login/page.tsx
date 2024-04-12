@@ -26,7 +26,7 @@ export default function LoginPage() {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: formData,
-    })
+    });
 
     if (response.status === 200) {
       notifications.show({
@@ -34,9 +34,8 @@ export default function LoginPage() {
         message: 'You have been logged in!',
         color: 'teal',
       });
-      push('/quote')
-    }
-    else {
+      push('/quote');
+    } else {
       const error = await response.json();
       notifications.show({
         title: 'Error',
@@ -50,7 +49,13 @@ export default function LoginPage() {
     <>
       <Form title="Login">
         <FloatingLabelInput label="Email" placeholder="new_user_1" required setState={setEmail} />
-        <FloatingLabelInput label="Password" placeholder="********" required type="password" setState={setPassword} />
+        <FloatingLabelInput
+          label="Password"
+          placeholder="********"
+          required
+          type="password"
+          setState={setPassword}
+        />
         <div>
           New user? <Link href="/register">Register here!</Link>
         </div>

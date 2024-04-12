@@ -16,6 +16,27 @@ export default function RegisterPage() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Email regex for basic validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      notifications.show({
+        title: 'Error',
+        message: 'Please enter a valid email address.',
+        color: 'red',
+      });
+      return; // Stop form submission process
+    }
+
+    // Check if the password length is less than 6 characters
+    if (password.length < 6) {
+      notifications.show({
+        title: 'Error',
+        message: 'Password must be at least 6 characters long.',
+        color: 'red',
+      });
+      return; // Stop the form submission process
+    }
+
     const formData = new URLSearchParams();
     formData.append('email', email);
     formData.append('password', password);
@@ -26,7 +47,7 @@ export default function RegisterPage() {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: formData,
-    })
+    });
 
     if (response.status === 200) {
       notifications.show({
@@ -34,9 +55,8 @@ export default function RegisterPage() {
         message: 'You have been logged in!',
         color: 'teal',
       });
-      push('/quote')
-    }
-    else {
+      push('/quote');
+    } else {
       const error = await response.json();
       notifications.show({
         title: 'Error',
@@ -50,9 +70,15 @@ export default function RegisterPage() {
     <>
       <Form title="Register">
         <FloatingLabelInput label="Email" placeholder="new_user_1" required setState={setEmail} />
-        <FloatingLabelInput label="Password" placeholder="********" required type="password" setState={setPassword} />
+        <FloatingLabelInput
+          label="Password"
+          placeholder="********"
+          required
+          type="password"
+          setState={setPassword}
+        />
         <div>
-          New user? <Link href="/login">Login here!</Link>
+          Previous user? <Link href="/login">Login here!</Link>
         </div>
         <Button onClick={handleSubmit}>Submit</Button>
       </Form>

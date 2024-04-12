@@ -2,8 +2,8 @@
 
 import { Form } from '../../components/Form';
 import { QuoteTable } from '../../components/QuoteTable';
-import { createClient } from '@/utils/supabase/server'
-import { redirect } from 'next/navigation'
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
 import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 import { useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';
@@ -31,19 +31,19 @@ export default function HistoryPage() {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: formData,
-      })
+      });
 
       if (response.status !== 200) {
-        notifications.show({ 
-          title: 'Something went wrong', 
-          message: 'History could not be fetched', 
+        notifications.show({
+          title: 'Something went wrong',
+          message: 'History could not be fetched',
           color: 'red',
           closeButtonProps: { display: 'none' },
-        })
+        });
       }
 
-      const tempHistory = await response.json()
-      setHistory(tempHistory['data'][0])
+      const tempHistory = await response.json();
+      setHistory(tempHistory['data'][0]);
       // console.log(tempHistory['data'][0]['history'])
     };
     fetchHistory();
@@ -53,7 +53,7 @@ export default function HistoryPage() {
     <>
       <HeaderTabs />
       <Form title="Fuel Quote History" width="80vw" top="20vh">
-        {history === '{}' ? 'Loading...' : <QuoteTable history={history["history"]} />}
+        {history === '{}' ? 'Loading...' : <QuoteTable history={history['history']} />}
       </Form>
     </>
   );

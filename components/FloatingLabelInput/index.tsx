@@ -26,7 +26,7 @@ export function FloatingLabelInput(props: {
     // console.log('initialValue:', typeof props.initialValue, props.initialValue)
     setValue(String(props.initialValue ?? ''));
   }, [props.initialValue]);
-  
+
   return (
     <TextInput
       label={props.label}
