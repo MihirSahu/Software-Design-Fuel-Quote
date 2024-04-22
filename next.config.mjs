@@ -1,3 +1,5 @@
+// next.config.mjs
+
 import bundleAnalyzer from '@next/bundle-analyzer';
 
 const withBundleAnalyzer = bundleAnalyzer({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import RegisterPage from '../register/page'; 
+import RegisterPage from '../register/page';
 import { MantineProvider } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 

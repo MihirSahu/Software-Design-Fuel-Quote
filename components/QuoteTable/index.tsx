@@ -23,89 +23,23 @@ export function QuoteTable(props: { history: any }) {
           }}
         >
           <QuoteTableRow header>
+            <QuoteTableCell>Date Requested</QuoteTableCell>
             <QuoteTableCell>Gallons Requested</QuoteTableCell>
+            <QuoteTableCell>Suggested Price</QuoteTableCell>
+            <QuoteTableCell>Total Amount Due</QuoteTableCell>
             <QuoteTableCell>Delivery Address</QuoteTableCell>
             <QuoteTableCell>Delivery Date</QuoteTableCell>
-            <QuoteTableCell>Price / Gallon</QuoteTableCell>
-            <QuoteTableCell>Total Amount Due</QuoteTableCell>
-            <QuoteTableCell>Request Date</QuoteTableCell>
           </QuoteTableRow>
           {props.history.map((quote: any, index: any) => (
             <QuoteTableRow key={index}>
+              <QuoteTableCell>{quote['request_date']}</QuoteTableCell>
               <QuoteTableCell>{quote['gallons_requested']}</QuoteTableCell>
+              <QuoteTableCell>{quote['suggested_price']}</QuoteTableCell>
+              <QuoteTableCell>{quote['amount_due']}</QuoteTableCell>
               <QuoteTableCell>{quote['delivery_address']}</QuoteTableCell>
               <QuoteTableCell>{quote['delivery_date']}</QuoteTableCell>
-              <QuoteTableCell>{quote['price']}</QuoteTableCell>
-              <QuoteTableCell>{quote['amount_due']}</QuoteTableCell>
-              <QuoteTableCell>{quote['request_date']}</QuoteTableCell>
             </QuoteTableRow>
           ))}
-          {/*
-          <QuoteTableRow>
-            <QuoteTableCell>15</QuoteTableCell>
-            <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
-            <QuoteTableCell>02/24/2024 04:00 PM</QuoteTableCell>
-            <QuoteTableCell>$5.23</QuoteTableCell>
-            <QuoteTableCell>$78.45</QuoteTableCell>
-            <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
-          </QuoteTableRow>
-          <QuoteTableRow>
-            <QuoteTableCell>15</QuoteTableCell>
-            <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
-            <QuoteTableCell>02/24/2024 04:00 PM</QuoteTableCell>
-            <QuoteTableCell>$5.23</QuoteTableCell>
-            <QuoteTableCell>$78.45</QuoteTableCell>
-            <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
-          </QuoteTableRow>
-          <QuoteTableRow>
-            <QuoteTableCell>15</QuoteTableCell>
-            <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
-            <QuoteTableCell>02/24/2024 04:00 PM</QuoteTableCell>
-            <QuoteTableCell>$5.23</QuoteTableCell>
-            <QuoteTableCell>$78.45</QuoteTableCell>
-            <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
-          </QuoteTableRow>
-          <QuoteTableRow>
-            <QuoteTableCell>15</QuoteTableCell>
-            <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
-            <QuoteTableCell>02/24/2024 04:00 PM</QuoteTableCell>
-            <QuoteTableCell>$5.23</QuoteTableCell>
-            <QuoteTableCell>$78.45</QuoteTableCell>
-            <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
-          </QuoteTableRow>
-          <QuoteTableRow>
-            <QuoteTableCell>15</QuoteTableCell>
-            <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
-            <QuoteTableCell>02/24/2024 04:00 PM</QuoteTableCell>
-            <QuoteTableCell>$5.23</QuoteTableCell>
-            <QuoteTableCell>$78.45</QuoteTableCell>
-            <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
-          </QuoteTableRow>
-          <QuoteTableRow>
-            <QuoteTableCell>15</QuoteTableCell>
-            <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
-            <QuoteTableCell>02/24/2024 04:00 PM</QuoteTableCell>
-            <QuoteTableCell>$5.23</QuoteTableCell>
-            <QuoteTableCell>$78.45</QuoteTableCell>
-            <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
-          </QuoteTableRow>
-          <QuoteTableRow>
-            <QuoteTableCell>15</QuoteTableCell>
-            <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
-            <QuoteTableCell>02/24/2024 04:00 PM</QuoteTableCell>
-            <QuoteTableCell>$5.23</QuoteTableCell>
-            <QuoteTableCell>$78.45</QuoteTableCell>
-            <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
-          </QuoteTableRow>
-          <QuoteTableRow>
-            <QuoteTableCell>15</QuoteTableCell>
-            <QuoteTableCell>1234 Main Street ...</QuoteTableCell>
-            <QuoteTableCell>02/24/2024 04:00 PM</QuoteTableCell>
-            <QuoteTableCell>$5.23</QuoteTableCell>
-            <QuoteTableCell>$78.45</QuoteTableCell>
-            <QuoteTableCell>02/23/2024 05:30 PM</QuoteTableCell>
-          </QuoteTableRow>
-        */}
         </div>
       </div>
     </>

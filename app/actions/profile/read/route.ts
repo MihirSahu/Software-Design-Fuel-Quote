@@ -1,9 +1,11 @@
+// app/actions/profile/read/route.ts
+
 import { NextResponse } from 'next/server';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/src/utils/supabase/server';
 
 export async function POST(request: Request) {
-  const requestUrl = new URL(request.url);
-  const formData = await request.formData();
+  // const requestUrl = new URL(request.url);
+  // const formData = await request.formData();
 
   const supabase = createClient();
   const {

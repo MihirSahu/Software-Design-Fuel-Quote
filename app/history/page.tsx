@@ -1,9 +1,11 @@
+// app/history/page.tsx
+
 'use client';
 
 import { Form } from '../../components/Form';
 import { QuoteTable } from '../../components/QuoteTable';
-import { createClient } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
+//import { createClient } from '@/src/utils/supabase/server';
+// import { redirect } from 'next/navigation';
 import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 import { useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';

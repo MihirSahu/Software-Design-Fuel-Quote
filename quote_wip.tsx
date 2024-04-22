@@ -1,41 +1,40 @@
 import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import QuotePage from '../quote/page';
+import QuotePage from './app/quote/page';
 import { MantineProvider } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 
 // Mock useRouter from next/router
 jest.mock('next/router', () => ({
-    useRouter: () => ({
-      pathname: '/',
-      route: '/',
-      query: {},
-      asPath: '/',
-      push: jest.fn().mockResolvedValue(true),
-      replace: jest.fn().mockResolvedValue(true),
-      reload: jest.fn(),
-      back: jest.fn(),
-      prefetch: jest.fn(),
-      beforePopState: jest.fn(),
-      events: {
-        on: jest.fn(),
-        off: jest.fn(),
-        emit: jest.fn(),
-      },
-      isFallback: false,
-      basePath: '/',
-      locale: 'en-US',
-      locales: ['en-US'],
-      defaultLocale: 'en-US',
-      isReady: true,
-      isPreview: false,
-      isLocaleDomain: false,
-      domainLocales: {}
-    }),
-    // Additional properties and methods can be added as needed
+  useRouter: () => ({
+    pathname: '/',
+    route: '/',
+    query: {},
+    asPath: '/',
+    push: jest.fn().mockResolvedValue(true),
+    replace: jest.fn().mockResolvedValue(true),
+    reload: jest.fn(),
+    back: jest.fn(),
+    prefetch: jest.fn(),
+    beforePopState: jest.fn(),
+    events: {
+      on: jest.fn(),
+      off: jest.fn(),
+      emit: jest.fn(),
+    },
+    isFallback: false,
+    basePath: '/',
+    locale: 'en-US',
+    locales: ['en-US'],
+    defaultLocale: 'en-US',
+    isReady: true,
+    isPreview: false,
+    isLocaleDomain: false,
+    domainLocales: {},
+  }),
+  // Additional properties and methods can be added as needed
 }));
-  
 
 jest.mock('@mantine/notifications', () => ({
   show: jest.fn(),
@@ -58,7 +57,9 @@ describe('QuotePage Interactions', () => {
 
   it('Allows typing in form fields', () => {
     fireEvent.change(screen.getByPlaceholderText('15'), { target: { value: '20' } });
-    fireEvent.change(screen.getByPlaceholderText('1234 Main Street'), { target: { value: '5678 Secondary Road' } });
+    fireEvent.change(screen.getByPlaceholderText('1234 Main Street'), {
+      target: { value: '5678 Secondary Road' },
+    });
     expect(screen.getByPlaceholderText('15')).toHaveValue('20');
     expect(screen.getByPlaceholderText('1234 Main Street')).toHaveValue('5678 Secondary Road');
   });
@@ -72,7 +73,9 @@ describe('QuotePage Interactions', () => {
     ) as jest.Mock;
 
     fireEvent.change(screen.getByPlaceholderText('15'), { target: { value: '20' } });
-    fireEvent.change(screen.getByPlaceholderText('1234 Main Street'), { target: { value: '5678 Secondary Road' } });
+    fireEvent.change(screen.getByPlaceholderText('1234 Main Street'), {
+      target: { value: '5678 Secondary Road' },
+    });
 
     fireEvent.click(screen.getByRole('button', { name: /request/i }));
 
