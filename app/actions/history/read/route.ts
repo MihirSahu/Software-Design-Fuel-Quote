@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     )
     .eq('user_id', userId);
 
-  if (error) { 
+  if (error) {
     return NextResponse.json({ error: error }, { status: 401 });
   } else {
     if (data.length === 0) {

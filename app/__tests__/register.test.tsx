@@ -21,15 +21,18 @@ describe('RegisterPage Render and Interaction', () => {
   const WrappedRegisterPage = () => (
     <MantineProvider>
       <RegisterPage />
+
     </MantineProvider>
   );
 
+  // Test 01
   it('Renders email and password inputs', () => {
     render(<WrappedRegisterPage />);
     expect(screen.getByPlaceholderText('new_user_1')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('********')).toBeInTheDocument();
   });
 
+  // Test 02
   it('Allows typing in email and password fields', () => {
     render(<WrappedRegisterPage />);
     fireEvent.change(screen.getByPlaceholderText('new_user_1'), {
@@ -40,6 +43,7 @@ describe('RegisterPage Render and Interaction', () => {
     expect(screen.getByPlaceholderText('********')).toHaveValue('password123');
   });
 
+  // Test 03
   it('Submits form and shows success notification on successful registration', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
@@ -69,6 +73,7 @@ describe('RegisterPage Render and Interaction', () => {
     });
   });
 
+  // Test 04
   it('Shows error notification for invalid email input', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
@@ -100,6 +105,7 @@ describe('RegisterPage Render and Interaction', () => {
     });
   });
 
+  // Test 05
   it('Shows error notification for password being too short.', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({

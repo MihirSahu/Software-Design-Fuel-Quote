@@ -37,7 +37,6 @@ export function FloatingLabelInput(props: {
       classNames={classes}
       value={value}
       onChange={(event) => {
-
         if (props.readOnly) return;
 
         const newText = event.currentTarget.value;

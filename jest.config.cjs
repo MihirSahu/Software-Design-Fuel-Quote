@@ -1,3 +1,5 @@
+// jest.config.cjs
+
 const nextJest = require('next/jest');
 
 const createJestConfig = nextJest({
@@ -9,11 +11,20 @@ const customJestConfig = {
   moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/pages/(.*)$': '<rootDir>/pages/$1',
+    'node-fetch': '<rootDir>/node_modules/node-fetch/lib/index.js',  // Adjust this if needed
   },
   testEnvironment: 'jest-environment-jsdom',
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest', // Ensure babel-jest is used for transformation
+  },
+  transformIgnorePatterns: [
+    '/node_modules/(?!node-fetch).+\\.js$',  // Transform node-fetch specifically if using ES modules
+  ],
+  testTimeout: 30000,  // Increases the timeout to 30 seconds
 };
 
 module.exports = createJestConfig(customJestConfig);
+
 /*
 import type { Config } from 'jest'
 import nextJest from 'next/jest.js'
