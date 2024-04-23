@@ -4,7 +4,7 @@ import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { FloatingLabelSelect } from '../../components/FloatingLabelSelect';
-import { createClient } from '@/utils/supabase/client';
+import { createClient } from '@/src/utils/supabase/client';
 import { redirect } from 'next/navigation';
 import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 import { notifications } from '@mantine/notifications';

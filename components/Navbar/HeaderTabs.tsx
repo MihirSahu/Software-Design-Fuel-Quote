@@ -31,7 +31,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { notifications } from '@mantine/notifications';
 import { usePathname } from 'next/navigation';
-import { createClient } from '@/utils/supabase/client';
+import { createClient } from '@/src/utils/supabase/client';
 
 const user = {
   name: 'Jane Spoonfighter',
