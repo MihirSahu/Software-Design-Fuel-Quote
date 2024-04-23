@@ -1,4 +1,8 @@
+// jest.setup.cjs
+
 require('@testing-library/jest-dom');
+
+jest.mock('next/router', () => require('next-router-mock'));
 
 const { getComputedStyle } = window;
 window.getComputedStyle = (elt) => getComputedStyle(elt);

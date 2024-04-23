@@ -1,15 +1,17 @@
+// app/quote/page.tsx
+
 'use client';
 
 import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { FloatingLabelSelect } from '../../components/FloatingLabelSelect';
-import { createClient } from '@/src/utils/supabase/client';
-import { redirect } from 'next/navigation';
+// import { createClient } from '@/src/utils/supabase/client';
+// import { redirect } from 'next/navigation';
 import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 import { notifications } from '@mantine/notifications';
 import { useState, useEffect } from 'react';
-import { stat } from 'fs';
+// import { stat } from 'fs';
 
 export default function ProfilePage() {
   /*
@@ -192,7 +194,7 @@ export default function ProfilePage() {
         <FloatingLabelSelect
           label="State"
           placeholder="NY"
-          initialValue="NY"
+          initialValue={state}
           data={states}
           required
           setState={setState}

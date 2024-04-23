@@ -2,20 +2,18 @@
 
 'use client';
 
-import { useState , useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 import { Text, Group } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
-import { createClient } from '@/src/utils/supabase/client';
 import { calculateTotalAmount } from '../../src/utils/businessLogic/pricingModule';
-// import { useRouter } from 'next/navigation';
-
-const supabase = createClient();
+import { useRouter } from 'next/navigation';
 
 export default function QuotePage() {
+  const router = useRouter();
   const [gallonsRequested, setGallonsRequested] = useState<string>('');
   const [deliveryAddress, setDeliveryAddress] = useState<string>('');
   const [deliveryDate, setDeliveryDate] = useState<string>(new Date().toISOString());
@@ -30,32 +28,42 @@ export default function QuotePage() {
 
   const handleGetQuote = async () => {
     if (!gallonsRequested) {
-      notifications.show({ title: 'Error', message: 'Please specify the gallons requested.', color: 'red' });
+      notifications.show({
+        title: 'Missing Amount',
+        message: 'Please specify the gallons requested.',
+        color: 'red',
+      });
       return;
     }
-
+    if (!deliveryDate) {
+      notifications.show({
+        title: 'Missing Delivery Date',
+        message: 'Please specify the delivery date.',
+        color: 'red',
+      });
+      return;
+    }
     if (!validateAddress(deliveryAddress)) {
       notifications.show({
         title: 'Invalid Address',
         message: 'Please enter a valid address.',
         color: 'red',
       });
-      return; // Stop the form submission if the address is invalid
+      return;
     }
-  
+
     try {
       const isTexas = /,\sTX\s\d{5}$/.test(deliveryAddress); // Check if the address is in Texas
       const totalAmountData = await calculateTotalAmount(parseInt(gallonsRequested), isTexas);
       setSuggestedPrice(totalAmountData.suggestedPrice);
       setTotalAmountDue(totalAmountData.totalAmount);
       setQuoteGenerated(true);
-  
+
       notifications.show({
         title: 'Quote Calculated!',
-        message: ``,
+        message: `Your quote is on screen.`,
         color: 'green',
       });
-  
     } catch (error) {
       if (error instanceof Error) {
         notifications.show({
@@ -71,22 +79,27 @@ export default function QuotePage() {
         });
       }
     }
-  }
-  
-
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!gallonsRequested) {
-      notifications.show({ title: 'Error', message: 'Please specify the number of gallons.', color: 'red' });
+      notifications.show({
+        title: 'Error',
+        message: 'Please specify the number of gallons.',
+        color: 'red',
+      });
       return;
     }
     if (!deliveryDate) {
-      notifications.show({ title: 'Error', message: 'Please specify the delivery date.', color: 'red' });
+      notifications.show({
+        title: 'Error',
+        message: 'Please specify the delivery date.',
+        color: 'red',
+      });
       return;
     }
-
     if (!validateAddress(deliveryAddress)) {
       notifications.show({
         title: 'Invalid Address',
@@ -118,11 +131,10 @@ export default function QuotePage() {
         color: 'teal',
       });
 
-      // router.push('/history');
-
+      router.push('/history');
     } else {
       const errorMsg = await response.json();
-        notifications.show({
+      notifications.show({
         title: 'Error',
         message: errorMsg.error.message || 'An unknown error occurred',
         color: 'red',
@@ -142,7 +154,7 @@ export default function QuotePage() {
         <FloatingLabelInput
           label="Gallons Requested"
           placeholder="15"
-          type="number"
+          type = "number"
           required
           setState={setGallonsRequested}
         />
@@ -162,14 +174,17 @@ export default function QuotePage() {
         />
         <Group style={{ margin: '10px 0', flexDirection: 'column' }}>
           <Text size="sm" style={{ marginBottom: 5, fontWeight: 500 }}>
-            Suggested Price per Gallon: <span style={{ fontWeight: 'bold' }}>${suggestedPrice}</span>
+            Suggested Price per Gallon:{' '}
+            <span style={{ fontWeight: 'bold' }}>${suggestedPrice}</span>
           </Text>
           <Text size="sm" style={{ fontWeight: 500 }}>
             Total Amount Due: <span style={{ fontWeight: 'bold' }}>${totalAmountDue}</span>
           </Text>
         </Group>
         <Button onClick={handleGetQuote}>Get Quote</Button>
-        <Button onClick={handleSubmit} disabled={!quoteGenerated}>Request</Button>
+        <Button onClick={handleSubmit} disabled={!quoteGenerated}>
+          Request
+        </Button>
       </Form>
     </>
   );

@@ -5,7 +5,7 @@ import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { theme } from '../theme';
 import { Notifications } from '@mantine/notifications';
-import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
+// import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 
 export const metadata = {
   title: 'Fuelonomy',
