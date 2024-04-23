@@ -8,13 +8,12 @@ export function FloatingLabelSelect(props: {
   label: string;
   placeholder: string;
   data: ComboboxData;
+  value: string;
   required?: boolean;
-  initialValue?: string;
   setState: (value: string) => void;
 }) {
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState(props.initialValue ?? '');
-  const floating = value.trim().length !== 0 || focused || undefined;
+  const floating = props.value.trim().length !== 0 || focused || undefined;
 
   return (
     <NativeSelect
@@ -23,8 +22,10 @@ export function FloatingLabelSelect(props: {
       placeholder={props.placeholder}
       required={props.required}
       classNames={classes}
-      value={value}
-      onChange={(event) => props.setState(event.currentTarget.value)}
+      value={props.value}
+      onChange={(event) => {
+        props.setState(event.currentTarget.value);
+      }}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       mt="md"
