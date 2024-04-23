@@ -27,7 +27,7 @@ export default function ProfilePage() {
   const [addressLine1, setAddressLine1] = useState<string>('');
   const [addressLine2, setAddressLine2] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [state, setState] = useState<string>('NY');
+  const [state, setState] = useState<string>('');
   const [zipCode, setZipCode] = useState<string>('');
 
   useEffect(() => {
@@ -58,7 +58,8 @@ export default function ProfilePage() {
 
       setFullName(parsedResponse['data'][0]['name']);
       setAddressLine1(parsedResponse['data'][0]['address_line_1']);
-      setAddressLine2(parsedResponse['data'][0]['address_line_2']);
+      const al2 = parsedResponse['data'][0]['address_line_2'];
+      setAddressLine2(al2 == 'null' ? '' : al2);
       setCity(parsedResponse['data'][0]['city']);
       setState(parsedResponse['data'][0]['state']);
       setZipCode(parsedResponse['data'][0]['zip_code']);
@@ -104,6 +105,7 @@ export default function ProfilePage() {
   };
 
   const states = [
+    '',
     'AL',
     'AK',
     'AZ',
@@ -194,7 +196,7 @@ export default function ProfilePage() {
         <FloatingLabelSelect
           label="State"
           placeholder="NY"
-          initialValue={state}
+          value={state}
           data={states}
           required
           setState={setState}
