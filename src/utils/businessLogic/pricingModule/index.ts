@@ -22,6 +22,7 @@ export async function calculateTotalAmount(
   gallonsRequested: number,
   isTexas: boolean
 ): Promise<{ suggestedPrice: string; totalAmount: string }> {
+  
   const currentPrice = new Decimal(1.5); // Static current price per gallon
   const locationFactor = new Decimal(isTexas ? 0.02 : 0.04);
 

@@ -5,11 +5,7 @@ import RegisterPage from '../register/page';
 import { MantineProvider } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 
-jest.mock('next/navigation', () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-  }),
-}));
+jest.mock('next/navigation', () => require('../__mocks__/next_navigation'));
 
 jest.mock('@mantine/notifications', () => ({
   notifications: {
@@ -21,7 +17,6 @@ describe('RegisterPage Render and Interaction', () => {
   const WrappedRegisterPage = () => (
     <MantineProvider>
       <RegisterPage />
-
     </MantineProvider>
   );
 

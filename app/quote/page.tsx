@@ -20,8 +20,7 @@ export default function QuotePage() {
   const [suggestedPrice, setSuggestedPrice] = useState<string>('');
   const [totalAmountDue, setTotalAmountDue] = useState<string>('');
   const [quoteGenerated, setQuoteGenerated] = useState<boolean>(false);
-  //const addressRegex = /^\d+\s[a-zA-Z\s]+,\s[a-zA-Z\s]+,\s[A-Z]{2}\s\d{5}$/;
-  const addressRegex = /^\s*\S+(?:\s+\S+){2}/
+  const addressRegex = /^\d+\s[a-zA-Z\s]+,\s[a-zA-Z\s]+,\s[A-Z]{2}\s\d{5}$/;
 
   const validateAddress = (address: string): boolean => {
     return addressRegex.test(address);
@@ -155,7 +154,7 @@ export default function QuotePage() {
         <FloatingLabelInput
           label="Gallons Requested"
           placeholder="15"
-          type = "number"
+          type="number"
           required
           setState={setGallonsRequested}
         />
