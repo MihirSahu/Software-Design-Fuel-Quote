@@ -32,8 +32,8 @@
     "next-router-mock": "^0.9.13",
     "node": "^18.20.2",
     "node-fetch": "^2.6.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {

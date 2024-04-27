@@ -1,4 +1,4 @@
-// app/quote/page.tsx
+// app/profile/page.tsx
 
 'use client';
 
@@ -6,28 +6,16 @@ import { FloatingLabelInput } from '../../components/FloatingLabelInput';
 import { Button } from '../../components/Button';
 import { Form } from '../../components/Form';
 import { FloatingLabelSelect } from '../../components/FloatingLabelSelect';
-// import { createClient } from '@/src/utils/supabase/client';
-// import { redirect } from 'next/navigation';
 import { HeaderTabs } from '@/components/Navbar/HeaderTabs';
 import { notifications } from '@mantine/notifications';
 import { useState, useEffect } from 'react';
-// import { stat } from 'fs';
 
 export default function ProfilePage() {
-  /*
-  const supabase = createClient()
-
-  const { data, error } = await supabase.auth.getUser()
-  if (error || !data?.user) {
-    redirect('/')
-  }
-  */
-
   const [fullName, setFullName] = useState<string>('');
   const [addressLine1, setAddressLine1] = useState<string>('');
   const [addressLine2, setAddressLine2] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [state, setState] = useState<string>('');
+  const [state, setState] = useState<string>('state');
   const [zipCode, setZipCode] = useState<string>('');
 
   useEffect(() => {
@@ -54,23 +42,40 @@ export default function ProfilePage() {
       }
 
       const parsedResponse = await response.json();
-      // console.log(parsedResponse['data'][0])
 
       setFullName(parsedResponse['data'][0]['name']);
       setAddressLine1(parsedResponse['data'][0]['address_line_1']);
-      const al2 = parsedResponse['data'][0]['address_line_2'];
-      setAddressLine2(al2 == 'null' ? '' : al2);
+      setAddressLine2(parsedResponse['data'][0]['address_line_2']);
       setCity(parsedResponse['data'][0]['city']);
       setState(parsedResponse['data'][0]['state']);
       setZipCode(parsedResponse['data'][0]['zip_code']);
 
-      //console.log(fullName, addressLine1, addressLine2, city, state, zipCode)
     };
     fetchHistory();
   }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Validate Zip Code - Ensure it contains only numeric characters
+    if (!/^\d+$/.test(zipCode)) {
+      notifications.show({
+        title: 'Validation Error',
+        message: 'Zip Code must contain only numeric characters.',
+        color: 'red',
+      });
+
+      return; // Stop the form submission if validation fails
+    }
+
+    if (!/^\d{5}$/.test(zipCode)) {
+      notifications.show({
+        title: 'Validation Error',
+        message: 'Zip Code must be exactly 5 numeric characters.',
+        color: 'red',
+      });
+      return; // Stop the form submission if validation fails
+    }
 
     const formData = new URLSearchParams();
     formData.append('fullName', fullName);
@@ -105,7 +110,6 @@ export default function ProfilePage() {
   };
 
   const states = [
-    '',
     'AL',
     'AK',
     'AZ',
@@ -196,15 +200,15 @@ export default function ProfilePage() {
         <FloatingLabelSelect
           label="State"
           placeholder="NY"
-          value={state}
           data={states}
           required
           setState={setState}
+          initialValue={state}
         />
         <FloatingLabelInput
           label="Zip Code"
           placeholder="12345"
-          maxLength={9}
+          maxLength={5}
           minLength={5}
           required
           number

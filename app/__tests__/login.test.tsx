@@ -6,14 +6,11 @@ import '@testing-library/jest-dom';
 import LoginPage from '../login/page';
 import { MantineProvider } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
+import { useRouter } from 'next/navigation';
 
 // Mocking necessary modules
 
-jest.mock('next/navigation', () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-  }),
-}));
+jest.mock('next/navigation', () => require('../__mocks__/next_navigation'));
 
 jest.mock('@mantine/notifications', () => ({
   notifications: {
@@ -28,12 +25,14 @@ describe('LoginPage Render and Interaction', () => {
     </MantineProvider>
   );
 
+  // Test 01
   it('Renders email and password inputs', () => {
     render(<WrappedLoginPage />);
     expect(screen.getByPlaceholderText('new_user_1')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('********')).toBeInTheDocument();
   });
 
+  // Test 02
   it('Allows typing in email and password fields', () => {
     render(<WrappedLoginPage />);
     fireEvent.change(screen.getByPlaceholderText('new_user_1'), {
@@ -44,6 +43,7 @@ describe('LoginPage Render and Interaction', () => {
     expect(screen.getByPlaceholderText('********')).toHaveValue('password');
   });
 
+  // Test 03
   it('Submits form and shows success notification on valid login', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
